@@ -1,14 +1,14 @@
 import { CircularProgress, Grid, IconButton } from '@mui/material'
 import { Edit } from '@mui/icons-material'
-import Header from '~components/Header'
+import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import { TitlePage } from '~components/TitlePage/TitlePage'
-import useLogs from 'hooks/useLogs'
+import { TitlePage } from '../components/TitlePage/TitlePage'
+import useLogs from '../hooks/useLogs'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { FishLogI } from '~services/api/fishLogServices/GetAllFishLogs'
+import { FishLogI } from '../services/api/fishLogServices/GetAllFishLogs'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -31,10 +31,11 @@ const Home = () => {
     }
   }, [])
 
-  const filteredLogs = logs.filter(
-    (log) =>
-      log.coordenates && log.coordenates.latitude && log.coordenates.longitude
-  )
+  function getLog (log) {
+    return log.coordenates && log.coordenates.latitude && log.coordenates.longitude
+  }
+
+  const filteredLogs = logs.filter(getLog)
 
   return (
     <Grid container>
@@ -46,6 +47,7 @@ const Home = () => {
         <TitlePage title="Mapa" />
         {logs.length ? (
           <MapContainer
+            className= "mapaContainer"
             center={[position.latitude, position.longitude]}
             zoom={13}
             scrollWheelZoom
