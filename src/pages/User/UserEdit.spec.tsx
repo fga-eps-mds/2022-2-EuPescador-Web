@@ -1,3 +1,4 @@
+import React from 'react'
 import { render } from '@testing-library/react'
 import UserEdit from './UserEdit'
 import Router, { BrowserRouter } from 'react-router-dom'
@@ -18,5 +19,7 @@ describe('User Edit page', () => {
     )
 
     expect(getByText('Alterar Usuário')).toBeInTheDocument()
+    
   })
+
 })
