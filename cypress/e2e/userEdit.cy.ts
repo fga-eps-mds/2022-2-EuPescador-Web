@@ -12,8 +12,8 @@ describe('User edit', () => {
       cy.contains('Entre na sua conta')
         .should('be.visible')
 
-      cy.get('#email').type('lucas@email.com')
-      cy.get('#password').type('1234')
+      cy.get('#email').type(email)
+      cy.get('#password').type(senha)
       cy.get('[data-testid="login-button"]').click()
       cy.get('[data-testid="usuarios-button"').click()
     })
