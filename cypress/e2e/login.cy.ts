@@ -8,7 +8,7 @@ describe('Tela de login', () => {
     cy.contains('Entre na sua conta')
       .should('be.visible')
 
-    cy.get('#email').type('carlos@email.com')
+    cy.get('#email').type('lucas@email.com')
     cy.get('#password').type('1234')
 
     cy.get('[data-testid="login-button"]').click()
@@ -19,7 +19,7 @@ describe('Tela de login', () => {
 
   it('Logout ', () => {
 
-    cy.get('#email').type('carlos@email.com')
+    cy.get('#email').type('lucas@email.com')
     cy.get('#password').type('1234')
 
     cy.get('[data-testid="login-button"]').click()
