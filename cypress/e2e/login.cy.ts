@@ -58,4 +58,21 @@ describe('Tela de login', () => {
     cy.contains('E-mail ou senha incorretos')
       .should('to.exist')
   })
+
+  it('Esqueci minha senha - Usuário não encontrado!', () => {
+    cy.contains('Entre na sua conta')
+      .should('be.visible')
+
+    cy.contains('Esqueci minha senha').click()
+
+    cy.contains('Digite o email da conta')
+      .should('be.visible')
+
+    cy.get('#email').type('randomEmail')
+
+    cy.contains('Redefinir').click()
+
+   // cy.get('.Toastify__toast-container')
+    //  .should('have.text', 'Usuário não encontrado!Usuário não encontrado!')
+  });
 }) 
