@@ -1,19 +1,20 @@
 import { ResI } from '../interfaces'
-import { adminService } from '../adminServices/adminService'
+import wikiService from './wikiService'
 import { UserProps } from '~components/Header'
 
-export async function deleteUser(id: string) {
+export async function DeleteWikiFish(fish_id: string) {
   try {
     const userData = JSON.parse(localStorage.getItem('UserData')) as UserProps
 
     if (userData.superAdmin) {
       const token = userData.token
       const superAdminToken = `Bearer ${token}`
-      const res: ResI = await adminService.delete(`/user/${id}`, { headers: { Authorization: superAdminToken } })
-
+      const res: ResI = await wikiService.delete(`/fishWiki/${fish_id}`, {
+        headers: { Authorization: superAdminToken },
+      })
       return res.status
     } else {
-      return 401
+      //console.log('Deu errado')
     }
   } catch (error) {
     //console.error(error)

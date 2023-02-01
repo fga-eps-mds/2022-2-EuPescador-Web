@@ -10,7 +10,10 @@ import {
 } from '@mui/material'
 
 import Pagination from '@mui/material/Pagination'
+<<<<<<< HEAD
 
+=======
+>>>>>>> d89da4e9d114102c4a33b61b8c6660486320a32f
 import Header, { UserProps } from '../../components/Header'
 import Sidebar from '../../components/Sidebar'
 import TableComponent from '../../components/Table'
