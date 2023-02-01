@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-import React from 'react'
-=======
 /* eslint-disable @typescript-eslint/no-unsafe-return */
->>>>>>> d89da4e9d114102c4a33b61b8c6660486320a32f
+
+import React from 'react'
 import { render } from '@testing-library/react'
 import UserEdit from './UserEdit'
 import Router, { BrowserRouter } from 'react-router-dom'
