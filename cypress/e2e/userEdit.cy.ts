@@ -1,27 +1,11 @@
 import { isObject } from "lodash"
-
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-describe('User edit', () => {
-
+describe('Gerência de Usuários', () => {
   beforeEach(() => {
-    const email = 'lucas@email.com'
-    const senha = '1234'
-
-    cy.session([email, senha], () => {
-      cy.visit('http://localhost:3000/')
-      cy.contains('Entre na sua conta')
-        .should('be.visible')
-
-      cy.get('#email').type(email)
-      cy.get('#password').type(senha)
-      cy.get('[data-testid="login-button"]').click()
-      cy.get('[data-testid="usuarios-button"').click()
-    })
+    cy.loginSession()
   })
-
   it('Alterar o nome do usuário', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('[data-testid="usuarios-button"').click()
+    cy.visit('usuarios')
 
     cy.contains('Gerência de Usuários')
       .should('be.visible')
@@ -47,10 +31,8 @@ describe('User edit', () => {
     cy.get('.Toastify__toast-body').click()
       .should('not.exist')
   })
-
   it('Botão de cancelar dentro da edição', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('[data-testid="usuarios-button"').click()
+    cy.visit('usuarios')
 
     cy.contains('Gerência de Usuários')
       .should('be.visible')
@@ -69,10 +51,8 @@ describe('User edit', () => {
     cy.contains('Gerência de Usuários')
       .should('be.visible')
   });
-
   it('Validar modal de exclusão', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('[data-testid="usuarios-button"').click()
+    cy.visit('usuarios')
 
     cy.contains('Gerência de Usuários')
       .should('be.visible')
@@ -91,10 +71,8 @@ describe('User edit', () => {
     //verifica se a modal foi fechada
     cy.contains('Deseja excluir o usuário?').should('not.exist')
   })
-
   it('Paginação', () => {
-    cy.visit('http://localhost:3000/')
-    cy.get('[data-testid="usuarios-button"').click()
+    cy.visit('usuarios')
 
     cy.contains('Gerência de Usuários')
       .should('be.visible')

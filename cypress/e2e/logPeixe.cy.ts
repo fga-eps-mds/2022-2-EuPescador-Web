@@ -1,24 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-describe('Log de Peixes', () => {
-
+describe('Logs dos Peixes', () => {
     beforeEach(() => {
-        const email = 'lucas@email.com'
-        const senha = '1234'
-
-        cy.session([email, senha], () => {
-            cy.visit('http://localhost:3000/')
-            cy.contains('Entre na sua conta')
-                .should('be.visible')
-
-            cy.get('#email').type(email)
-            cy.get('#password').type(senha)
-            cy.get('[data-testid="login-button"]').click()
-            cy.get('[data-testid="usuarios-button"').click()
-        })
+        cy.loginSession()
     })
-
     it('Exportar logs', () => {
-        cy.visit('http://localhost:3000/')
+        cy.visit('logs')
 
         cy.get('[href="/logs"]').click()
 
@@ -31,9 +17,8 @@ describe('Log de Peixes', () => {
 
         cy.readFile('C:/Users/cardo/OneDrive/Documentos/Projetos/2022-2-EuPescador-Web/cypress/downloads/fish-logs.xlsx')
     });
-
     it('Editar log - Salvar edição', () => {
-        cy.visit('http://localhost:3000/')
+        cy.visit('logs')
 
         cy.get('[href="/logs"]').click()
 
@@ -47,14 +32,16 @@ describe('Log de Peixes', () => {
 
         cy.get('[name="species"]').type('{selectall}{backspace}Cypress Editou')
 
+        cy.contains('Visível').click()
+
         cy.contains('Salvar').click()
 
-        //Aguardar desenvolvimento 
+        cy.get('.Toastify__toast-body').should('have.text', 'Log atualizado com sucesso!')
 
+        cy.contains('Logs dos Peixes').should('be.visible')
     })
-
     it('Editar log - Botão de cancelar', () => {
-        cy.visit('http://localhost:3000/')
+        cy.visit('logs')
 
         cy.get('[href="/logs"]').click()
 
@@ -70,9 +57,8 @@ describe('Log de Peixes', () => {
 
         cy.contains('Logs dos Peixes').should('be.visible')
     })
-
     it('Excluir log', () => {
-        cy.visit('http://localhost:3000/')
+        cy.visit('logs')
 
         cy.get('[href="/logs"]').click()
 
@@ -86,5 +72,4 @@ describe('Log de Peixes', () => {
 
         cy.contains('Cancelar').click()
     });
-
 });
