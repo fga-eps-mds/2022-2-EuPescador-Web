@@ -1,4 +1,4 @@
-import { getByTestId, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import TableComponent from '.'
 
 describe('Table component', () => {
@@ -34,7 +34,7 @@ describe('Table component', () => {
   it('Should render edit button', () => {
     const onEditMocked = jest.fn()
     const { getAllByTestId } = render(<TableComponent columns={columns} rows={rows} onEdit={onEditMocked} />)
-    const [editButton] = getAllByTestId('editButton')
+    const [editButton] = getAllByTestId(`editButton`)
     editButton.click()
 
     expect(editButton).toBeInTheDocument()

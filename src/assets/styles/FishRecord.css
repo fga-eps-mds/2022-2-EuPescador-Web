@@ -1,0 +1,80 @@
+.custom-file-upload {
+  border: 2px solid #0095d9;
+  display: flex;
+  cursor: pointer;
+  width: 200px;
+  padding: 20px;
+  height: 116px;
+  background-color: rgba(0, 149, 217, 0.2);
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.custom-file-image {
+  display: flex;
+  cursor: pointer;
+  width: 170px;
+  height: 116px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.text-color-file-upload {
+  color: #0095d9;
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+}
+
+.box-input-fish-record {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.label-input-fish-record {
+  color: #0095d9;
+  font-weight: bold;
+}
+
+.input-fish-record {
+  background-color: rgba(0, 149, 217, 0.2);
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.div-select {
+  overflow: hidden;
+}
+
+.div-select select {
+  background: rgba(0, 149, 217, 0.2);
+  height: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  padding-left: 10px;
+  width: 100%;
+  color: black;
+  text-indent: 0.01px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.div-select select::-ms-expand {
+  display: none;
+}
+.div-select select {
+  appearance: none;
+  -moz-appearance: none;
+}

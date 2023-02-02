@@ -1,55 +1,46 @@
 import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { MdLogout, MdInsertEmoticon, MdOutlineAssignment } from 'react-icons/md'
-import { BsMap } from 'react-icons/bs'
-import { FaCircle } from 'react-icons/fa'
-import { GiDoubleFish } from 'react-icons/gi'
 import { UserProps } from './Header'
+
+import exit from '../assets/icons/sair_simbolo_web.svg'
+import log from '../assets/icons/log_simbolo.svg'
+import map from '../assets/icons/mapa_simbolo.svg'
+import list from '../assets/icons/listagem_simbolo.svg'
+import user from '../assets/icons/usuario_simbolo.svg'
 
 const routesAdmin = [
   {
     path: '/dados',
     name: 'Listar',
-    icon: <MdOutlineAssignment />,
+    icon: list,
+    datatesteid: '',
   },
   {
     path: '/',
     name: 'Mapa',
-    icon: <BsMap />,
+    icon: map,
+    datatesteid: '',
   },
   {
     path: '/usuarios',
     name: 'Usuários',
-    icon: <MdInsertEmoticon />,
+    icon: user,
+    datatesteid: 'usuarios-button',
   },
 
   {
     path: '/logs',
     name: 'Logs',
-    icon: <GiDoubleFish />,
-  },
-
-]
-
-const routesNotAdmin = [
-  {
-    path: '/dados',
-    name: 'Listar',
-    icon: <MdOutlineAssignment />,
-  },
-  {
-    path: '/',
-    name: 'Mapa',
-    icon: <BsMap />,
+    icon: log,
+    datatesteid: '',
   },
 ]
 
+const routesOnlyAdmin = [routesAdmin[0], routesAdmin[1], routesAdmin[3]]
 
 const Sidebar = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggle = () => setIsOpen(isOpen) // Desativei a animação porque nao agrega valor ao produto e esta com bugs
+  const [isOpen] = useState(false)
 
   const showAnimation = {
     hidden: {
@@ -68,14 +59,22 @@ const Sidebar = ({ children }) => {
     },
   }
 
+  function renderIcon(icon: string) {
+    return (
+      <div className="icon">
+        <img src={icon} style={{ width: '25px', height: '30px' }} />
+      </div>
+    )
+  }
+
   function fazRota() {
     const user = JSON.parse(localStorage.getItem('UserData')) as UserProps
-    if (user.admin) {
+    if (user && user.superAdmin) {
       return (
         <section className="routes">
           {routesAdmin.map((route) => (
-            <NavLink to={route.path} key={route.name} className="link">
-              <div className="icon">{route.icon}</div>
+            <NavLink to={route.path} key={route.name} className="link" data-testid={route.datatesteid}>
+              {renderIcon(route.icon)}
               <AnimatePresence>
                 {isOpen && (
                   <motion.div
@@ -93,12 +92,12 @@ const Sidebar = ({ children }) => {
           ))}
         </section>
       )
-    } else {
+    } else if (user && user.admin) {
       return (
         <section className="routes">
-          {routesNotAdmin.map((route) => (
+          {routesOnlyAdmin.map((route) => (
             <NavLink to={route.path} key={route.name} className="link">
-              <div className="icon">{route.icon}</div>
+              {renderIcon(route.icon)}
               <AnimatePresence>
                 {isOpen && (
                   <motion.div
@@ -147,24 +146,10 @@ const Sidebar = ({ children }) => {
         }}
         className={`sidebar`}
       >
-        <div className="top_section">
-          <AnimatePresence>
-            {isOpen && (
-              <motion.h1 variants={showAnimation} initial="hidden" animate="show" exit="hidden" className="logo">
-                Logo
-              </motion.h1>
-            )}
-          </AnimatePresence>
-          <div className="bars">
-            <FaCircle onClick={toggle} />
-          </div>
-        </div>
         <div>{fazRota()}</div>
         <section className="logout">
           <div className="logout-icon">
-            <button onClick={handleLogoutClick}>
-              <MdLogout />
-            </button>
+            <button onClick={handleLogoutClick}>{renderIcon(exit)}</button>
           </div>
         </section>
       </motion.div>

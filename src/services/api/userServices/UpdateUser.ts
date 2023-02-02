@@ -5,9 +5,9 @@ export interface UserI {
     admin: boolean
     city: string
     email: string
-    id: number
+    id: string
     name: string
-    password: string
+    password?: string
     phone: string
     state: string
     superAdmin: boolean
@@ -16,7 +16,7 @@ export interface UserI {
 export async function UpdateUser(user_id: string, token: string, user: UserI) {
     const userToken = `Bearer ${token}`
     const res: ResI = await userService.put(
-        `/user/`,
+        `/user/${user_id}`,
         {
             user_id: user_id,
             ...user

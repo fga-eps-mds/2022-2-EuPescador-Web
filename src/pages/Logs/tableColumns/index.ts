@@ -1,22 +1,18 @@
 export const columns = [
   {
-    label: 'Id',
-    value: 'id',
-  },
-  {
     label: 'Nome',
     value: 'name',
   },
   {
-    label: 'Classe',
+    label: 'Grande Grupo',
     value: 'largeGroup',
   },
   {
-    label: 'Ordem',
+    label: 'Grupo',
     value: 'group',
   },
   {
-    label: 'Espécie',
+    label: 'Espécies',
     value: 'species',
   },
   {
@@ -28,7 +24,7 @@ export const columns = [
     value: 'weight',
   },
   {
-    label: 'Status',
-    value: 'reviewed',
+    label: 'Visível',
+    value: 'visible',
   },
 ]

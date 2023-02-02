@@ -1,5 +1,6 @@
 import { ResI } from '../interfaces'
 import { fishLogService } from './fishLogService'
+import { UserProps } from '~components/Header'
 
 export async function UpdateFishLog(
   log_id: string,
@@ -18,7 +19,7 @@ export async function UpdateFishLog(
   visible: boolean,
   token?: string
 ) {
-  const userId = localStorage.getItem('@eupescador/userId')
+  const userId = JSON.parse(localStorage.getItem('UserData')) as UserProps
   const userToken = `Bearer ${token}`
   let photo = ''
   let reviewedBy = null
@@ -34,7 +35,7 @@ export async function UpdateFishLog(
   } else {
     photo = null
   }
-  const res: ResI = await fishLogService.patch(
+  const res: ResI = await fishLogService.put(
     `/fishLog/${log_id}`,
     {
       name,

@@ -2,6 +2,7 @@
 // Externs and Interns libs
 import { useState, useEffect } from 'react'
 import { Grid, Box, Modal } from '@mui/material'
+import Pagination from '@mui/material/Pagination'
 
 // Components
 import Header from '../../components/Header'
@@ -11,24 +12,33 @@ import { FishModal } from '../../components/FishModal/FishModal'
 import { TitlePage } from '../../components/TitlePage/TitlePage'
 
 // Services
-import { GetWikiFishes } from '../../services/api/wikiServices/getWikiFishes'
-import { FishWiki } from '../../services/api/interfaces'
+import { FishWikiArray, GetAllFishes, FishWiki } from '../../services/api/interfaces'
 
 const Datas = () => {
   const [open, setOpen] = useState(false)
-  const [fishes, setFishes] = useState([] as FishWiki[])
+  const [page, setPage] = useState(1)
+  const [fishes, setFishes] = useState<FishWikiArray>()
   const [modalFish, setModalFish] = useState({} as FishWiki)
 
-  const handleOpen = () => setOpen(true)
+  const fishesPerPage = 32
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
   const handleClose = () => setOpen(false)
 
   useEffect(() => {
-    GetWikiFishes()
-      .then((res: FishWiki[]) => setFishes(res))
+    GetAllFishes(page, fishesPerPage)
+      .then((res: FishWikiArray) => setFishes(res))
       .catch((e) => console.log(e))
-  }, [])
+  }, [page])
 
-  const handleOpenFishModal = (res: FishWiki) => {
+  function onPageChange(event, page: number) {
+    setPage(page)
+  }
+
+  function handleOpenFishModal(res: FishWiki) {
     setModalFish(res)
 
     handleOpen()
@@ -38,41 +48,48 @@ const Datas = () => {
     <>
       <Grid container>
         <Header />
-        <Grid item xs={2} md={1} >
+        <Grid item xs={2} md={1}>
           <Sidebar children={undefined} />
         </Grid>
         <Grid item xs={10} md={11}>
           <TitlePage title="Listagem de Peixes" button />
 
           <Grid container spacing={{ xs: 2, md: 3 }}>
-            {(fishes || [])?.map((res: FishWiki, index) => {
-              return (
-                <Grid item xs={12} sm={6} md={4} xl={3} key={index}>
-                  <Box
-                    onClick={() => { handleOpenFishModal(res) }}
-                  >
-                    <FishCard
-                      fish={{
-                        name: res.commonName,
-                        imageUrl: res.photo == null ? 'https://source.unsplash.com/qsHDqcJzHOA' : res.photo,
+            {fishes &&
+              (fishes.allFishWiki || []).map((res: FishWiki, index) => {
+                return (
+                  <Grid item xs={12} sm={6} md={4} xl={3} key={index}>
+                    <Box
+                      onClick={() => {
+                        handleOpenFishModal(res)
                       }}
-                    ></FishCard>
-                  </Box>
-                </Grid>
-              )
-            })}
+                    >
+                      <FishCard
+                        fish={{
+                          name: res.commonName,
+                          imageUrl: res.photo == null ? 'https://imgur.com/ybTpCh6.png' : res.photo,
+                        }}
+                      ></FishCard>
+                    </Box>
+                  </Grid>
+                )
+              })}
           </Grid>
+          {fishes && (
+            <Pagination
+              count={fishes.totalPages}
+              page={page}
+              onChange={onPageChange}
+              style={{ marginTop: '30px', justifyContent: 'center', display: 'flex', marginBottom: '15px' }}
+              color="primary"
+              size="small"
+            />
+          )}
         </Grid>
       </Grid>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-      >
+      <Modal open={open} onClose={handleClose}>
         <Box>
-          <FishModal
-            fish={modalFish}
-          ></FishModal>
+          <FishModal fish={modalFish} onClose={handleClose}></FishModal>
         </Box>
       </Modal>
     </>
