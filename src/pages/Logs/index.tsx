@@ -41,13 +41,19 @@ export default function FishLogs() {
 
   const fetchData = async () => {
     try {
-      const user: UserProps = JSON.parse(localStorage.getItem('UserData')) as UserProps
+      const user: UserProps = JSON.parse(
+        localStorage.getItem('UserData')
+      ) as UserProps
       const reps = await GetAllFishLogs(user && user.token, '')
       reps.forEach((element) => {
         element.visible = element.visible ? 'Sim' : 'Não'
 
-        element.latitude = element.coordenates ? element.coordenates.latitude || ' ' : ''
-        element.longitude = element.coordenates ? element.coordenates.longitude || ' ' : ''
+        element.latitude = element.coordenates
+          ? element.coordenates.latitude || ' '
+          : ''
+        element.longitude = element.coordenates
+          ? element.coordenates.longitude || ' '
+          : ''
 
         delete element.reviewedBy
         delete element.family
@@ -120,7 +126,9 @@ export default function FishLogs() {
             <TableComponent
               columns={columns}
               rows={currentRecords || []}
-              onDelete={(row: { id: string; name: string }) => handleClickOpen(row.id, row.name)}
+              onDelete={(row: { id: string; name: string }) =>
+                handleClickOpen(row.id, row.name)
+              }
               onEdit={(row: { id: string }) => navigate(`/logs/${row.id}`)}
             />
           </>
@@ -146,7 +154,9 @@ export default function FishLogs() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{`Deseja excluir o registro do peixe ${logNameToDelete}?`}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {`Deseja excluir o registro do peixe ${logNameToDelete}?`}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Clique em confirmar para prosseguir com a exclusão do registro
