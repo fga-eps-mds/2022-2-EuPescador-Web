@@ -22,7 +22,7 @@ describe('Recover page', () => {
   })
   it('Should render logo', () => {
     render(<Recovery />)
-    const element  = document.getElementsByClassName('logo')
+    const element = document.getElementsByClassName('logo')
     const style = getComputedStyle(element[0])
     expect(style.visibility).toBe('visible')
   })
@@ -41,6 +41,13 @@ describe('Recover page', () => {
     expect(style.backgroundColor).toBe('')
   })
 
+  it('Toast shoud be visible', () => {
+    render(<Recovery />)
+    const element = document.getElementsByClassName('Toastify')
+    const style = getComputedStyle(element[0])
+    expect(style.visibility).toBe('visible')
+  })
+
   it('Image should be visible', () => {
     render(<Recovery />)
     const element = document.getElementsByClassName('imagem')
@@ -56,4 +63,4 @@ describe('Recover page', () => {
   })
 })
 
-export { }
+export {}

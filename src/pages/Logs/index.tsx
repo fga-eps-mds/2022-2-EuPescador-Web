@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom'
 import { GetAllFishLogs } from '../../services/api/fishLogServices/GetAllFishLogs'
 import { deleteFishLog } from '../../services/api/fishLogServices/deleteFishLog'
 import { DownloadExcel } from 'react-excel-export'
+import Pagination from '@mui/material/Pagination'
 
 import { columns } from './tableColumns'
 
@@ -27,6 +28,12 @@ export default function FishLogs() {
 
   const [idToDelete, setIdToDelete] = useState('')
   const [logNameToDelete, setLogNameToDelete] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [recordsPerPage] = useState(10)
+  const indexOfLastRecord = currentPage * recordsPerPage
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
+  const currentRecords = logs.slice(indexOfFirstRecord, indexOfLastRecord)
+  const nPages = Math.ceil(logs.length / recordsPerPage)
 
   useEffect(() => {
     fetchData().catch(console.error)
@@ -71,6 +78,10 @@ export default function FishLogs() {
     setOpen(true)
   }
 
+  function onPageChange(event, page: number) {
+    setCurrentPage(page)
+  }
+
   const handleClickClose = () => {
     setOpen(false)
     setLogNameToDelete('')
@@ -92,7 +103,7 @@ export default function FishLogs() {
       </Grid>
       <Grid item xs={11}>
         <TitlePage title="Logs dos Peixes" />
-        {logs.length ? (
+        {currentRecords.length > 0 ? (
           <>
             <div
               style={{
@@ -114,7 +125,7 @@ export default function FishLogs() {
             </div>
             <TableComponent
               columns={columns}
-              rows={logs || []}
+              rows={currentRecords || []}
               onDelete={(row: { id: string; name: string }) =>
                 handleClickOpen(row.id, row.name)
               }
@@ -124,6 +135,18 @@ export default function FishLogs() {
         ) : (
           <CircularProgress />
         )}
+        {currentRecords.length > 0
+          ? currentRecords && (
+              <Pagination
+                count={nPages}
+                page={currentPage}
+                onChange={onPageChange}
+                style={{ marginTop: '30px', justifyContent: 'center', display: 'flex', marginBottom: '15px' }}
+                color="primary"
+                size="small"
+              />
+            )
+          : null}
       </Grid>
       <Dialog
         open={open}
