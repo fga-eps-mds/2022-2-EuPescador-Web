@@ -102,7 +102,7 @@ export default function FishLogs() {
         <Sidebar children={undefined} />
       </Grid>
       <Grid item xs={11}>
-        <TitlePage title="Logs dos Peixes" />
+        <TitlePage title="Logs de Peixes" />
         {currentRecords.length > 0 ? (
           <>
             <div
