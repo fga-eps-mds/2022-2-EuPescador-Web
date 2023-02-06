@@ -35,3 +35,19 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('loginSession', (email, password) => {
+    const email = 'lucas@email.com'
+    const senha = '1234'
+
+    cy.session([email, senha], () => {
+      cy.visit('/')
+      cy.contains('Entre na sua conta')
+        .should('be.visible')
+
+      cy.get('#email').type(email)
+      cy.get('#password').type(senha)
+      cy.get('[data-testid="login-button"]').click()
+      cy.get('[data-testid="usuarios-button"').click()
+    })
+})
