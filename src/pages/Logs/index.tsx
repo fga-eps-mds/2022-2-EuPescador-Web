@@ -55,7 +55,6 @@ export default function FishLogs() {
           ? element.coordenates.longitude || ' '
           : ''
 
-        delete element.reviewedBy
         delete element.family
         delete element.createdAt
         delete element.createdBy
