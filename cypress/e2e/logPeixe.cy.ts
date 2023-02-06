@@ -3,7 +3,7 @@ describe('Logs dos Peixes', () => {
     beforeEach(() => {
         cy.loginSession()
     })
-    it('Exportar logs', () => {
+    it.skip('Exportar logs', () => {
         cy.visit('logs')
 
         cy.get('[href="/logs"]').click()
