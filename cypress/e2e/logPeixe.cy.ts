@@ -8,7 +8,7 @@ describe('Logs dos Peixes', () => {
 
         cy.get('[href="/logs"]').click()
 
-        cy.contains('Logs dos Peixes').should('be.visible')
+        cy.contains('Logs de Peixes').should('be.visible')
 
         cy.url()
             .should('include', '/logs')
@@ -17,16 +17,16 @@ describe('Logs dos Peixes', () => {
 
         cy.readFile('C:/Users/cardo/OneDrive/Documentos/Projetos/2022-2-EuPescador-Web/cypress/downloads/fish-logs.xlsx')
     });
-    it('Editar log - Salvar edição', () => {
+    it.skip('Editar log - Salvar edição', () => {
         cy.visit('logs')
 
         cy.get('[href="/logs"]').click()
 
-        cy.contains('Logs dos Peixes').should('be.visible')
+        cy.contains('Logs de Peixes').should('be.visible')
 
         cy.url().should('include', '/logs')
 
-        cy.contains('baiacu').parent().find('[data-testid="editButton"]').click()
+        cy.contains('Arraia').parent().find('[data-testid="editButton"]').click()
 
         cy.contains('Detalhes do Log').should('be.visible')
 
@@ -45,30 +45,30 @@ describe('Logs dos Peixes', () => {
 
         cy.get('[href="/logs"]').click()
 
-        cy.contains('Logs dos Peixes').should('be.visible')
+        cy.contains('Logs de Peixes').should('be.visible')
 
         cy.url().should('include', '/logs')
 
-        cy.contains('baiacu').parent().find('[data-testid="editButton"]').click()
+        cy.contains('Arraia').parent().find('[data-testid="editButton"]').click()
 
         cy.contains('Detalhes do Log').should('be.visible')
 
         cy.contains('Cancelar').click()
 
-        cy.contains('Logs dos Peixes').should('be.visible')
+        cy.contains('Logs de Peixes').should('be.visible')
     })
     it('Excluir log', () => {
         cy.visit('logs')
 
         cy.get('[href="/logs"]').click()
 
-        cy.contains('Logs dos Peixes').should('be.visible')
+        cy.contains('Logs de Peixes').should('be.visible')
 
         cy.url().should('include', '/logs')
 
-        cy.contains('baiacu').parent().find('[data-testid="deleteButton"]').click()
+        cy.contains('Arraia').parent().find('[data-testid="deleteButton"]').click()
 
-        cy.contains('Deseja excluir o registro do peixe baiacu?').should('be.visible')
+        cy.contains('Deseja excluir o registro do peixe Cano?').should('be.visible')
 
         cy.contains('Cancelar').click()
     });

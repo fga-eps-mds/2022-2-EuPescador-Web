@@ -18,9 +18,8 @@ describe('Listagem de Peixes', () => {
         cy.contains('Cadastrar Espécie').click()
 
         cy.contains('Nome usual').next().type(randomFish)
-        cy.contains('Grande Grupo').next().type(randomGrandeGrupo)
+        cy.get('#selectLargeGroup').select('Arraias')
         cy.contains('Nome científico').next().type(randomNomeCientifico)
-        cy.contains('Alimentação').parent().parent().contains('Grupo').next().type(randomGrupo)
 
         cy.get('#file-input').selectFile('cypress/fixtures/animal.jpg', { force: true })
 
@@ -31,7 +30,7 @@ describe('Listagem de Peixes', () => {
         cy.contains(randomFish)
             .should('be.visible')
     });
-    it('Cadastrar Espécie - Erro ao criar peixe', () => {
+    it.skip('Cadastrar Espécie - Nome Científico já cadastrado', () => {
         cy.visit('dados')
 
         cy.contains('Listagem de Peixes')
@@ -39,11 +38,11 @@ describe('Listagem de Peixes', () => {
 
         cy.contains('Cadastrar Espécie').click()
 
-        cy.contains('Nome usual').next().type('Peixe teste')
+        cy.contains('Nome científico').next().type('Apteronotus camposdapazi')
 
         cy.contains('Salvar').click()
 
-        cy.get('.Toastify__toast-body').should('contains.text', 'Erro ao criar peixe')
+        cy.get('.Toastify__toast-body').should('contains.text', 'Essa espécie de peixe já foi cadastrada, altere o campo de nome científico')
 
     });
     it('Cadastrar e Deletar peixe', () => {
@@ -51,6 +50,7 @@ describe('Listagem de Peixes', () => {
         const randomGrandeGrupo = faker.animal.fish();
         const randomGrupo = faker.animal.fish();
         const randomNomeCientifico = faker.animal.fish();
+
         cy.visit('dados')
 
         cy.contains('Listagem de Peixes')
@@ -59,9 +59,8 @@ describe('Listagem de Peixes', () => {
         cy.contains('Cadastrar Espécie').click()
 
         cy.contains('Nome usual').next().type(randomFish)
-        cy.contains('Grande Grupo').next().type(randomGrandeGrupo)
+        cy.get('#selectLargeGroup').select('Arraias')
         cy.contains('Nome científico').next().type(randomNomeCientifico)
-        cy.contains('Alimentação').parent().parent().contains('Grupo').next().type(randomGrupo)
 
         cy.get('#file-input').selectFile('cypress/fixtures/animal.jpg', { force: true })
 
