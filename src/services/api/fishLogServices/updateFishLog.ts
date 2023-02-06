@@ -1,6 +1,5 @@
 import { ResI } from '../interfaces'
 import { fishLogService } from './fishLogService'
-import { UserProps } from '~components/Header'
 
 export async function UpdateFishLog(
   log_id: string,
@@ -13,18 +12,11 @@ export async function UpdateFishLog(
   photoString: string | undefined | undefined,
   length: string | undefined,
   weight: string | undefined,
-  reviewed: boolean | undefined,
-  admin: boolean,
-  superAdmin: boolean,
   visible: boolean,
   token?: string
 ) {
-  const userId = JSON.parse(localStorage.getItem('UserData')) as UserProps
   const userToken = `Bearer ${token}`
   let photo = ''
-  let reviewedBy = null
-
-  if (admin || superAdmin) reviewedBy = userId
 
   const coordenates = {
     latitude: latitude ? parseFloat(latitude) : null,
@@ -46,9 +38,6 @@ export async function UpdateFishLog(
       photo,
       length: length ? parseFloat(length) : null,
       weight: weight ? parseFloat(weight) : null,
-      reviewed,
-      reviewedBy: Number(reviewedBy),
-      updatedBy: Number(userId),
       visible,
     },
     { headers: { Authorization: userToken } },

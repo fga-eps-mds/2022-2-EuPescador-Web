@@ -93,9 +93,6 @@ export default function LogsDetails() {
       log.photo,
       log.length,
       log.weight,
-      log.reviewed,
-      true,
-      true,
       true,
       user.token
     )
@@ -144,7 +141,7 @@ export default function LogsDetails() {
               <CssTextField
                 margin="normal"
                 fullWidth
-                label="Classe"
+                label="Grande Grupo"
                 name="largeGroup"
                 value={log.largeGroup ? log.largeGroup : ''}
                 onChange={function (e) {
@@ -164,7 +161,7 @@ export default function LogsDetails() {
               <CssTextField
                 margin="normal"
                 fullWidth
-                label="Ordem"
+                label="Grupo"
                 name="group"
                 value={log.group ? log.group : ''}
                 onChange={function (e) {

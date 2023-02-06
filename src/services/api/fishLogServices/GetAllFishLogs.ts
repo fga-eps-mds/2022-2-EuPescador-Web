@@ -18,7 +18,6 @@ export interface FishLogI {
     latitude: string
     longitude: string
   }
-  reviewedBy,
   family,
   visible,
   createdAt,
