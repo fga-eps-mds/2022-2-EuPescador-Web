@@ -1,32 +1,41 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4658de62-6067-47bf-96b3-75cd6064080a/deploy-status)](https://app.netlify.com/sites/eupescadorweb/deploys)
+# 2022-2-EuPescador-Web
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2022-2-EuPescador-Web&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fga-eps-mds_2022-2-EuPescador-Web) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fga-eps-mds_2022-2-EuPescador-Web&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fga-eps-mds_2022-2-EuPescador-Web)
 
-# Getting Started with Create React App
+## 1. Ambiente de desenvolvimento
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+Para fazer uso do ambiente de desenvolvimento é necessário possuir o pacote abaixo instalado.
+* [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)
 
-## Available Scripts
+## 2. Uso do yarn
 
-In the project directory, you can run:
+Rode o seguinte comando para instalar as dependências
 
-### `yarn start`
+```bash
+yarn
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Rode o seguinte comando para iniciar a aplicação
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+yarn start
+```
 
-### `yarn test`
+Abra o [http://localhost:3000](http://localhost:3000) para visualizar no browser.<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Rode o seguinte comando para rodar os testes
 
-### `yarn build`
+```bash
+yarn test
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Rode o seguinte comando para rodar teste específico
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+yarn test <path do arquivo>
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Rode o seguinte comando para rodar os testes do cypress
+
+```bash
+yarn cypress run
+```
